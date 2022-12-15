@@ -39,12 +39,18 @@ declare module 'adaptivecards-templating/template-engine' {
 	     * The root data object the template will bind to. Expressions that refer to $root in the template payload
 	     * map to this field. Initially, $data also maps to $root.
 	     */
-	    $root: any;
+	    $root?: any;
+	    /**
+	     * The host data object the template will bind to. Expressions that refer to $host in the template payload
+	     * map to this field. This allows a host process to supply additional context to the template.
+	     */
+	    $host?: any;
 	}
 	/**
 	 * Represents a template that can be bound to data.
 	 */
 	export class Template {
+	    private templateExpansionWarnings;
 	    private static prepare;
 	    private static internalTryEvaluateExpression;
 	    /**
@@ -149,6 +155,11 @@ declare module 'adaptivecards-templating/template-engine' {
 	     *   is dependent on the type of the original template payload passed to the constructor.
 	     */
 	    expand(context: IEvaluationContext): any;
+	    /**
+	     * Getter method for the array of warning strings
+	     * @returns An array storing any warnings that occurred while expanding the template
+	     */
+	    getLastTemplateExpansionWarnings(): string[];
 	}
 
 }
