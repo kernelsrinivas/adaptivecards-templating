@@ -334,7 +334,7 @@ export class Template {
 
     private internalExpand(node: any): any {
         let result: any;
-
+        try {
         this._context.saveState();
 
         if (Array.isArray(node)) {
@@ -450,7 +450,7 @@ export class Template {
         }
 
         this._context.restoreLastState();
-
+    } catch(error){}
         return result;
     }
 
